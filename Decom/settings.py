@@ -25,7 +25,7 @@ SECRET_KEY = 'wn^$*11z8g1qg^6(m8!%^2)@2)mct2smhd%rpr^d36m)dvsg(v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['decom.up.railway.app','localhost']
+ALLOWED_HOSTS = ['decom.onrender.com','localhost']
 
 
 # Application definition

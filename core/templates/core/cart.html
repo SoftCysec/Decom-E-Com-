@@ -1,0 +1,64 @@
+{% extends 'core/main.html' %}
+{% load static %}
+{% block content %}
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="box-element">
+
+				<a  class="btn btn-outline-dark" href="{% url 'core:store' %}">&#x2190; Continue Shopping</a>
+
+				<br>
+				<br>
+				<table class="table">
+					<tr>
+                    
+						<th><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></th>
+						<th><h5>Total:<strong> Ksh: {{object.get_total|floatformat:2}}</strong></h5></th>
+						<th>
+							<a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'core:checkout' %}">Checkout</a>
+						</th>
+					</tr>
+				</table>
+
+			</div>
+
+			<br>
+			<div class="box-element">
+				<div class="cart-row">
+					<div style="flex:2"></div>
+					<div style="flex:2"><strong>Item</strong></div>
+					<div style="flex:1"><strong>Price</strong></div>
+					<div style="flex:1"><strong>Quantity</strong></div>
+					<div style="flex:1"><strong> </strong></div>
+					<div style="flex:1"><strong>Total</strong></div>
+				</div>
+				{% for order_item in object.items.all %}
+				<div class="cart-row align-items-center">
+					<div style="flex:2"><img class="row-image" src="{{order_item.product.imageURL}}"></div>
+					<div style="flex:1"><p>{{order_item.item.title}}</p></div>
+					<div style="flex:1"><p>Ksh: {{order_item.item.price|floatformat:2}}</p></div>
+					<div style="flex:1">
+						<p class="quantity">{{order_item.quantity}}</p>
+						<div class="quantity">
+							<a href="{% url 'core:add-to-cart' order_item.item.slug %}">
+								<img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}">
+							</a>
+							<a href="{% url 'core:remove-single-item-from-cart' order_item.item.slug %}">
+								<img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
+							</a>
+						</div>
+					</div>
+					<div style="flex:1">
+						<p>Ksh: {{order_item.get_total_price|floatformat:2}}</p>
+						<a href="{% url 'core:remove-from-cart' order_item.item.slug %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-trash float-sm-right " viewBox="0 0 16 16">
+							<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+							<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+						  </svg>
+						</a>	
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endblock content %}

@@ -4,6 +4,7 @@ charset-normalizer==3.0.1
 Django
 django-countries==7.5.1
 django-crispy-forms==1.14.0
+gunicorn==20.1.0
 idna==3.4
 mpesa==0.0.1
 Pillow==9.4.0
